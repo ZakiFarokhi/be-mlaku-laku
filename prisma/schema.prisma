@@ -1,14 +1,156 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  username  String   @unique
+  password  String
+  role      Role
+  createdAt DateTime @default(now())
+
+  // Relasi manual
+  touristId        String?            @db.ObjectId
+  staffProfileId   String?            @db.ObjectId
+  pointId          String?            @db.ObjectId
+  isDeleted        Boolean            @default(false)
+  RewardRedemption RewardRedemption[]
+  Wishlist         Wishlist[]
+}
+
+model Tourist {
+  id              String          @id @default(auto()) @map("_id") @db.ObjectId
+  userId          String          @unique @db.ObjectId
+  fullName        String
+  email           String
+  phoneNumber     String
+  birthDate       DateTime
+  gender          Gender
+  nationality     String
+  membershipLevel MembershipLevel @default(BRONZE)
+
+  trips      Trip[]
+  TripReview TripReview[]
+}
+
+model Trip {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  touristId     String       @db.ObjectId
+  destination   String
+  departureDate DateTime
+  returnDate    DateTime
+  price         Float
+  status        TripStatus
+  notes         String?
+  createdAt     DateTime     @default(now())
+  Tourist       Tourist      @relation(fields: [touristId], references: [id])
+  TripReview    TripReview[]
+}
+
+model StaffProfile {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  userId   String @unique @db.ObjectId
+  fullName String
+  position String
+  email    String
+}
+
+model Point {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @unique @db.ObjectId
+  total     Int      @default(0)
+  updatedAt DateTime @updatedAt
+}
+
+model PointTransaction {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String    @db.ObjectId
+  amount      Int
+  type        PointType
+  description String
+  createdAt   DateTime  @default(now())
+}
+
+model Reward {
+  id               String             @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  description      String
+  points           Int
+  stock            Int
+  createdAt        DateTime           @default(now())
+  RewardRedemption RewardRedemption[]
+}
+
+model RewardRedemption {
+  id        String           @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String           @db.ObjectId
+  rewardId  String           @db.ObjectId
+  status    RedemptionStatus @default(PENDING)
+  createdAt DateTime         @default(now())
+
+  reward Reward @relation(fields: [rewardId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model TripReview {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  tripId    String   @db.ObjectId
+  touristId String   @db.ObjectId
+  rating    Int
+  comment   String
+  deleted   Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  Trip    Trip    @relation(fields: [tripId], references: [id])
+  Tourist Tourist @relation(fields: [touristId], references: [id])
+}
+
+model Wishlist {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String   @db.ObjectId
+  destination String
+  notes       String?
+  createdAt   DateTime @default(now())
+
+  User User @relation(fields: [userId], references: [id])
+}
+
+enum Role {
+  OWNER
+  STAFF
+  TOURIST
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum MembershipLevel {
+  BRONZE
+  SILVER
+  GOLD
+}
+
+enum TripStatus {
+  PLANNED
+  COMPLETED
+  CANCELLED
+}
+
+enum PointType {
+  EARN
+  REDEEM
+}
+
+enum RedemptionStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }

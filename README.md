@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank"><img src="https://datacakra.com/wp-content/uploads/2023/03/Logo-horizontal-1-209x50.png" width="120" alt="Nest Logo" /></a>
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
@@ -29,7 +29,20 @@
 ## Project setup
 
 ```bash
+# create .env and copy from .env.example
+$ cp .env.exampe .env
+
+# install depedencies
 $ npm install
+
+# generate prisma on local
+$ npx prisma generate
+
+# push declared schema in mongoDB
+$ npx prisma db push
+
+# seeder for development only
+$ npm run prisma:seed
 ```
 
 ## Compile and run the project
@@ -73,12 +86,6 @@ Check out a few resources that may come in handy when working with NestJS:
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
 

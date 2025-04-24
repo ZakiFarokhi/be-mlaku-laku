@@ -1,0 +1,582 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1": {
+      "get": {
+        "operationId": "AppController_getHello",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["App"]
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful, returns JWT token",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/LoginResponseDto" }
+              }
+            }
+          },
+          "401": { "description": "Invalid credentials" }
+        },
+        "summary": "User login",
+        "tags": ["Auth"]
+      }
+    },
+    "/api/v1/auth/register": {
+      "post": {
+        "operationId": "AuthController_register",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RegisterDto" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "User successfully registered" },
+          "400": { "description": "Validation failed" }
+        },
+        "summary": "Register new user",
+        "tags": ["Auth"]
+      }
+    },
+    "/api/v1/users/me": {
+      "get": {
+        "operationId": "UserController_getMe",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "security": [{ "bearer": [] }],
+        "summary": "Get current user",
+        "tags": ["Users"]
+      }
+    },
+    "/api/v1/users/{id}": {
+      "patch": {
+        "operationId": "UserController_updateProfile",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateUserDto" }
+            }
+          }
+        },
+        "responses": { "200": { "description": "" } },
+        "security": [{ "bearer": [] }],
+        "summary": "Update user profile",
+        "tags": ["Users"]
+      },
+      "delete": {
+        "operationId": "UserController_softDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "security": [{ "bearer": [] }],
+        "summary": "Soft delete (ban) user",
+        "tags": ["Users"]
+      }
+    },
+    "/api/v1/users": {
+      "get": {
+        "operationId": "UserController_findAll",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "security": [{ "bearer": [] }],
+        "summary": "List all users (admin only)",
+        "tags": ["Users"]
+      }
+    },
+    "/api/v1/trips": {
+      "post": {
+        "operationId": "TripController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateTripDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } },
+        "security": [{ "bearer": [] }],
+        "summary": "Create a new trip (by tourist)",
+        "tags": ["Trips"]
+      },
+      "get": {
+        "operationId": "TripController_findAll",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "security": [{ "bearer": [] }],
+        "summary": "List all trips (admin only)",
+        "tags": ["Trips"]
+      }
+    },
+    "/api/v1/trips/me": {
+      "get": {
+        "operationId": "TripController_findMine",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "security": [{ "bearer": [] }],
+        "summary": "Get trips of current user (tourist)",
+        "tags": ["Trips"]
+      }
+    },
+    "/api/v1/trips/{id}": {
+      "get": {
+        "operationId": "TripController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "security": [{ "bearer": [] }],
+        "summary": "Get trip by ID",
+        "tags": ["Trips"]
+      },
+      "patch": {
+        "operationId": "TripController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateTripDto" }
+            }
+          }
+        },
+        "responses": { "200": { "description": "" } },
+        "security": [{ "bearer": [] }],
+        "summary": "Update trip (by tourist)",
+        "tags": ["Trips"]
+      }
+    },
+    "/api/v1/trips/{id}/cancel": {
+      "patch": {
+        "operationId": "TripController_cancel",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "security": [{ "bearer": [] }],
+        "summary": "Cancel trip (soft delete)",
+        "tags": ["Trips"]
+      }
+    },
+    "/api/v1/reward": {
+      "post": {
+        "operationId": "RewardController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateRewardDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } },
+        "security": [{ "bearer": [] }],
+        "summary": "Create new reward (Admin)",
+        "tags": ["Reward"]
+      },
+      "get": {
+        "operationId": "RewardController_findAll",
+        "parameters": [
+          {
+            "name": "includeDeleted",
+            "required": true,
+            "in": "query",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "summary": "List available rewards",
+        "tags": ["Reward"]
+      }
+    },
+    "/api/v1/reward/{id}": {
+      "patch": {
+        "operationId": "RewardController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateRewardDto" }
+            }
+          }
+        },
+        "responses": { "200": { "description": "" } },
+        "security": [{ "bearer": [] }],
+        "summary": "Update reward (Admin)",
+        "tags": ["Reward"]
+      }
+    },
+    "/api/v1/reward/redeem": {
+      "post": {
+        "operationId": "RewardController_redeem",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RedeemRewardDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } },
+        "security": [{ "bearer": [] }],
+        "summary": "Redeem a reward (User)",
+        "tags": ["Reward"]
+      }
+    },
+    "/api/v1/reward/redemptions": {
+      "get": {
+        "operationId": "RewardController_getMyRedemptions",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "security": [{ "bearer": [] }],
+        "summary": "Get my reward redemptions or all (admin)",
+        "tags": ["Reward"]
+      }
+    },
+    "/api/v1/reward/redemptions/{id}/{status}": {
+      "patch": {
+        "operationId": "RewardController_updateRedemption",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "status",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "security": [{ "bearer": [] }],
+        "summary": "Approve or reject reward redemption (Admin)",
+        "tags": ["Reward"]
+      }
+    },
+    "/api/v1/points": {
+      "get": {
+        "operationId": "PointController_getMyPoint",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "security": [{ "bearer": [] }],
+        "summary": "Get total point of current user",
+        "tags": ["Points"]
+      },
+      "post": {
+        "operationId": "PointController_createTransaction",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePointTransactionDto"
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } },
+        "security": [{ "bearer": [] }],
+        "summary": "Add or remove point manually (admin only)",
+        "tags": ["Points"]
+      }
+    },
+    "/api/v1/points/history": {
+      "get": {
+        "operationId": "PointController_getMyHistory",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "security": [{ "bearer": [] }],
+        "summary": "Get point history of current user",
+        "tags": ["Points"]
+      }
+    },
+    "/api/v1/wishlist": {
+      "post": {
+        "operationId": "WishlistController_createWishlist",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateWishlistDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } },
+        "summary": "Add a destination to the wishlist",
+        "tags": ["Wishlist"]
+      },
+      "get": {
+        "operationId": "WishlistController_getWishlist",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "summary": "Get the user's wishlist",
+        "tags": ["Wishlist"]
+      }
+    },
+    "/api/v1/wishlist/{id}": {
+      "patch": {
+        "operationId": "WishlistController_updateWishlist",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateWishlistDto" }
+            }
+          }
+        },
+        "responses": { "200": { "description": "" } },
+        "summary": "Update a destination in the wishlist",
+        "tags": ["Wishlist"]
+      },
+      "delete": {
+        "operationId": "WishlistController_deleteWishlist",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "summary": "Delete a destination from the wishlist",
+        "tags": ["Wishlist"]
+      }
+    },
+    "/api/v1/wishlist/admin": {
+      "get": {
+        "operationId": "WishlistController_getAllWishlist",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "summary": "Admin - Get all users' wishlists",
+        "tags": ["Wishlist"]
+      }
+    }
+  },
+  "info": {
+    "title": "Nestjs Prisma Starter",
+    "description": "The nestjs API description",
+    "version": "1.5",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": { "scheme": "bearer", "bearerFormat": "JWT", "type": "http" }
+    },
+    "schemas": {
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "johndoe",
+            "description": "Username for login"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123",
+            "description": "User password"
+          }
+        },
+        "required": ["username", "password"]
+      },
+      "LoginResponseDto": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+          },
+          "username": { "type": "string", "example": "johndoe" },
+          "role": { "type": "string", "example": "TOURIST" }
+        },
+        "required": ["accessToken", "username", "role"]
+      },
+      "RegisterDto": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "johndoe",
+            "description": "Unique username"
+          },
+          "password": {
+            "type": "string",
+            "example": "securePass123",
+            "description": "User password"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["OWNER", "STAFF", "TOURIST"],
+            "example": "TOURIST",
+            "description": "User role"
+          },
+          "fullName": {
+            "type": "string",
+            "example": "John Doe",
+            "description": "Full name of the tourist"
+          },
+          "email": {
+            "type": "string",
+            "example": "john@example.com",
+            "description": "Email of the tourist"
+          }
+        },
+        "required": ["username", "password", "role"]
+      },
+      "UpdateUserDto": {
+        "type": "object",
+        "properties": {
+          "username": { "type": "string" },
+          "password": { "type": "string" }
+        }
+      },
+      "CreateTripDto": {
+        "type": "object",
+        "properties": {
+          "destination": { "type": "string" },
+          "departureDate": { "format": "date-time", "type": "string" },
+          "returnDate": { "format": "date-time", "type": "string" },
+          "price": { "type": "number" },
+          "notes": { "type": "string" }
+        },
+        "required": ["destination", "departureDate", "returnDate", "price"]
+      },
+      "UpdateTripDto": {
+        "type": "object",
+        "properties": {
+          "destination": { "type": "string" },
+          "departureDate": { "format": "date-time", "type": "string" },
+          "returnDate": { "format": "date-time", "type": "string" },
+          "price": { "type": "number" },
+          "status": { "type": "string" },
+          "notes": { "type": "string" }
+        }
+      },
+      "CreateRewardDto": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "points": { "type": "number" },
+          "stock": { "type": "number" }
+        },
+        "required": ["name", "description", "points", "stock"]
+      },
+      "UpdateRewardDto": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "points": { "type": "number" },
+          "stock": { "type": "number" }
+        }
+      },
+      "RedeemRewardDto": {
+        "type": "object",
+        "properties": { "rewardId": { "type": "string" } },
+        "required": ["rewardId"]
+      },
+      "CreatePointTransactionDto": {
+        "type": "object",
+        "properties": {
+          "type": { "type": "string", "enum": ["EARN", "REDEEM"] },
+          "amount": { "type": "number" },
+          "description": { "type": "string" }
+        },
+        "required": ["type", "amount", "description"]
+      },
+      "CreateWishlistDto": {
+        "type": "object",
+        "properties": {
+          "destination": { "type": "string" },
+          "notes": { "type": "string" }
+        },
+        "required": ["destination", "notes"]
+      },
+      "UpdateWishlistDto": {
+        "type": "object",
+        "properties": {
+          "destination": { "type": "string" },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}
