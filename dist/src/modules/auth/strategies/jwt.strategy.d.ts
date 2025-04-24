@@ -5,6 +5,7 @@ export declare class JwtStrategy extends JwtStrategy_base {
         userId: any;
         username: any;
         role: any;
+        touristId: any;
     }>;
 }
 export {};

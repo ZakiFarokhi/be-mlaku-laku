@@ -4,16 +4,27 @@ import { UpdateTripDto } from './dto/update-trip.dto';
 export declare class TripController {
     private readonly tripService;
     constructor(tripService: TripService);
-    create(req: any, dto: CreateTripDto): Promise<{
+    createForSelf(req: any, dto: CreateTripDto): Promise<{
         id: string;
-        createdAt: Date;
         touristId: string;
-        status: import(".prisma/client").$Enums.TripStatus;
         destination: string;
         departureDate: Date;
         returnDate: Date;
         price: number;
+        status: import(".prisma/client").$Enums.TripStatus;
         notes: string | null;
+        createdAt: Date;
+    }>;
+    createForTourist(touristId: string, dto: CreateTripDto): Promise<{
+        id: string;
+        touristId: string;
+        destination: string;
+        departureDate: Date;
+        returnDate: Date;
+        price: number;
+        status: import(".prisma/client").$Enums.TripStatus;
+        notes: string | null;
+        createdAt: Date;
     }>;
     findAll(): Promise<({
         Tourist: {
@@ -29,57 +40,57 @@ export declare class TripController {
         };
     } & {
         id: string;
-        createdAt: Date;
         touristId: string;
-        status: import(".prisma/client").$Enums.TripStatus;
         destination: string;
         departureDate: Date;
         returnDate: Date;
         price: number;
+        status: import(".prisma/client").$Enums.TripStatus;
         notes: string | null;
+        createdAt: Date;
     })[]>;
     findMine(req: any): Promise<{
         id: string;
-        createdAt: Date;
         touristId: string;
-        status: import(".prisma/client").$Enums.TripStatus;
         destination: string;
         departureDate: Date;
         returnDate: Date;
         price: number;
+        status: import(".prisma/client").$Enums.TripStatus;
         notes: string | null;
+        createdAt: Date;
     }[]>;
     findOne(id: string): Promise<{
         id: string;
-        createdAt: Date;
         touristId: string;
-        status: import(".prisma/client").$Enums.TripStatus;
         destination: string;
         departureDate: Date;
         returnDate: Date;
         price: number;
+        status: import(".prisma/client").$Enums.TripStatus;
         notes: string | null;
+        createdAt: Date;
     }>;
     update(id: string, dto: UpdateTripDto, req: any): Promise<{
         id: string;
-        createdAt: Date;
         touristId: string;
-        status: import(".prisma/client").$Enums.TripStatus;
         destination: string;
         departureDate: Date;
         returnDate: Date;
         price: number;
+        status: import(".prisma/client").$Enums.TripStatus;
         notes: string | null;
+        createdAt: Date;
     }>;
     cancel(id: string, req: any): Promise<{
         id: string;
-        createdAt: Date;
         touristId: string;
-        status: import(".prisma/client").$Enums.TripStatus;
         destination: string;
         departureDate: Date;
         returnDate: Date;
         price: number;
+        status: import(".prisma/client").$Enums.TripStatus;
         notes: string | null;
+        createdAt: Date;
     }>;
 }

@@ -24,10 +24,26 @@ import { ApiBearerAuth, ApiTags, ApiOperation } from '@nestjs/swagger';
 export class TripController {
   constructor(private readonly tripService: TripService) {}
 
+  // Untuk tourist (autentikasi biasa)
   @Post()
   @ApiOperation({ summary: 'Create a new trip (by tourist)' })
-  async create(@Req() req, @Body() dto: CreateTripDto) {
-    const touristId = req.user.touristId;
+  async createForSelf(@Req() req, @Body() dto: CreateTripDto) {
+    console.log(req.user);
+    const touristId = req.user.userId;
+    return this.tripService.create(touristId, dto);
+  }
+
+  // Untuk admin/staff menentukan touristId secara eksplisit
+  @Post(':touristId')
+  @Roles(Role.OWNER, Role.STAFF)
+  @UseGuards(RolesGuard)
+  @ApiOperation({
+    summary: 'Create a new trip for specific tourist (admin/staff)',
+  })
+  async createForTourist(
+    @Param('touristId') touristId: string,
+    @Body() dto: CreateTripDto,
+  ) {
     return this.tripService.create(touristId, dto);
   }
 
@@ -42,7 +58,7 @@ export class TripController {
   @Get('me')
   @ApiOperation({ summary: 'Get trips of current user (tourist)' })
   async findMine(@Req() req) {
-    return this.tripService.findMine(req.user.touristId);
+    return this.tripService.findMine(req.user.userId);
   }
 
   @Get(':id')
@@ -58,12 +74,12 @@ export class TripController {
     @Body() dto: UpdateTripDto,
     @Req() req,
   ) {
-    return this.tripService.update(id, dto, req.user.touristId);
+    return this.tripService.update(id, dto, req.user.userId);
   }
 
   @Patch(':id/cancel')
   @ApiOperation({ summary: 'Cancel trip (soft delete)' })
   async cancel(@Param('id') id: string, @Req() req) {
-    return this.tripService.cancel(id, req.user.touristId);
+    return this.tripService.cancel(id, req.user.userId);
   }
 }

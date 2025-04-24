@@ -26,24 +26,28 @@ let TripController = class TripController {
     constructor(tripService) {
         this.tripService = tripService;
     }
-    async create(req, dto) {
-        const touristId = req.user.touristId;
+    async createForSelf(req, dto) {
+        console.log(req.user);
+        const touristId = req.user.userId;
+        return this.tripService.create(touristId, dto);
+    }
+    async createForTourist(touristId, dto) {
         return this.tripService.create(touristId, dto);
     }
     async findAll() {
         return this.tripService.findAll();
     }
     async findMine(req) {
-        return this.tripService.findMine(req.user.touristId);
+        return this.tripService.findMine(req.user.userId);
     }
     async findOne(id) {
         return this.tripService.findOne(id);
     }
     async update(id, dto, req) {
-        return this.tripService.update(id, dto, req.user.touristId);
+        return this.tripService.update(id, dto, req.user.userId);
     }
     async cancel(id, req) {
-        return this.tripService.cancel(id, req.user.touristId);
+        return this.tripService.cancel(id, req.user.userId);
     }
 };
 exports.TripController = TripController;
@@ -55,7 +59,20 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, create_trip_dto_1.CreateTripDto]),
     __metadata("design:returntype", Promise)
-], TripController.prototype, "create", null);
+], TripController.prototype, "createForSelf", null);
+__decorate([
+    (0, common_1.Post)(':touristId'),
+    (0, roles_decorators_1.Roles)(client_1.Role.OWNER, client_1.Role.STAFF),
+    (0, common_1.UseGuards)(roles_guard_1.RolesGuard),
+    (0, swagger_1.ApiOperation)({
+        summary: 'Create a new trip for specific tourist (admin/staff)',
+    }),
+    __param(0, (0, common_1.Param)('touristId')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, create_trip_dto_1.CreateTripDto]),
+    __metadata("design:returntype", Promise)
+], TripController.prototype, "createForTourist", null);
 __decorate([
     (0, common_1.Get)(),
     (0, roles_decorators_1.Roles)(client_1.Role.OWNER, client_1.Role.STAFF),
