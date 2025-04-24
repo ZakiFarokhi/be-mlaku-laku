@@ -1,0 +1,48 @@
+{"context":"NestFactory","level":"info","message":"Starting Nest application...","timestamp":"2025-04-24T06:16:52.857Z"}
+{"context":"InstanceLoader","level":"info","message":"LoggerModule dependencies initialized","timestamp":"2025-04-24T06:16:52.896Z"}
+{"context":"InstanceLoader","level":"info","message":"PrismaModule dependencies initialized","timestamp":"2025-04-24T06:16:52.913Z"}
+{"context":"InstanceLoader","level":"info","message":"JwtModule dependencies initialized","timestamp":"2025-04-24T06:16:52.930Z"}
+{"context":"InstanceLoader","level":"info","message":"AppModule dependencies initialized","timestamp":"2025-04-24T06:16:52.935Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigHostModule dependencies initialized","timestamp":"2025-04-24T06:16:52.936Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2025-04-24T06:16:52.938Z"}
+{"context":"InstanceLoader","level":"info","message":"AuthModule dependencies initialized","timestamp":"2025-04-24T06:16:52.940Z"}
+{"context":"InstanceLoader","level":"info","message":"WishlistModule dependencies initialized","timestamp":"2025-04-24T06:16:52.940Z"}
+{"context":"InstanceLoader","level":"info","message":"UserModule dependencies initialized","timestamp":"2025-04-24T06:16:52.941Z"}
+{"context":"InstanceLoader","level":"info","message":"TripModule dependencies initialized","timestamp":"2025-04-24T06:16:52.942Z"}
+{"context":"InstanceLoader","level":"info","message":"RewardModule dependencies initialized","timestamp":"2025-04-24T06:16:52.942Z"}
+{"context":"InstanceLoader","level":"info","message":"PointModule dependencies initialized","timestamp":"2025-04-24T06:16:52.942Z"}
+{"context":"RoutesResolver","level":"info","message":"AppController {/api/v1}:","timestamp":"2025-04-24T06:16:52.984Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1, GET} route","timestamp":"2025-04-24T06:16:52.987Z"}
+{"context":"RoutesResolver","level":"info","message":"AuthController {/api/v1/auth}:","timestamp":"2025-04-24T06:16:52.987Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/login, POST} route","timestamp":"2025-04-24T06:16:52.990Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/register, POST} route","timestamp":"2025-04-24T06:16:52.991Z"}
+{"context":"RoutesResolver","level":"info","message":"UserController {/api/v1/users}:","timestamp":"2025-04-24T06:16:52.991Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/me, GET} route","timestamp":"2025-04-24T06:16:52.992Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/:id, PATCH} route","timestamp":"2025-04-24T06:16:52.992Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users, GET} route","timestamp":"2025-04-24T06:16:52.993Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/:id, DELETE} route","timestamp":"2025-04-24T06:16:52.993Z"}
+{"context":"RoutesResolver","level":"info","message":"TripController {/api/v1/trips}:","timestamp":"2025-04-24T06:16:52.993Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/trips, POST} route","timestamp":"2025-04-24T06:16:52.994Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/trips, GET} route","timestamp":"2025-04-24T06:16:52.994Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/trips/me, GET} route","timestamp":"2025-04-24T06:16:52.995Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/trips/:id, GET} route","timestamp":"2025-04-24T06:16:52.995Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/trips/:id, PATCH} route","timestamp":"2025-04-24T06:16:52.995Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/trips/:id/cancel, PATCH} route","timestamp":"2025-04-24T06:16:52.996Z"}
+{"context":"RoutesResolver","level":"info","message":"RewardController {/api/v1/reward}:","timestamp":"2025-04-24T06:16:52.996Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/reward, POST} route","timestamp":"2025-04-24T06:16:52.996Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/reward, GET} route","timestamp":"2025-04-24T06:16:52.997Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/reward/:id, PATCH} route","timestamp":"2025-04-24T06:16:52.997Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/reward/redeem, POST} route","timestamp":"2025-04-24T06:16:52.997Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/reward/redemptions, GET} route","timestamp":"2025-04-24T06:16:52.998Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/reward/redemptions/:id/:status, PATCH} route","timestamp":"2025-04-24T06:16:52.998Z"}
+{"context":"RoutesResolver","level":"info","message":"PointController {/api/v1/points}:","timestamp":"2025-04-24T06:16:52.998Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/points, GET} route","timestamp":"2025-04-24T06:16:52.999Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/points/history, GET} route","timestamp":"2025-04-24T06:16:52.999Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/points, POST} route","timestamp":"2025-04-24T06:16:52.999Z"}
+{"context":"RoutesResolver","level":"info","message":"WishlistController {/api/v1/wishlist}:","timestamp":"2025-04-24T06:16:52.999Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/wishlist, POST} route","timestamp":"2025-04-24T06:16:53.000Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/wishlist, GET} route","timestamp":"2025-04-24T06:16:53.000Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/wishlist/:id, PATCH} route","timestamp":"2025-04-24T06:16:53.000Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/wishlist/:id, DELETE} route","timestamp":"2025-04-24T06:16:53.000Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/wishlist/admin, GET} route","timestamp":"2025-04-24T06:16:53.000Z"}
+{"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2025-04-24T06:16:53.004Z"}
