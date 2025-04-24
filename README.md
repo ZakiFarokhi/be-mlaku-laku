@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://datacakra.com/wp-content/uploads/2023/03/Logo-horizontal-1-418x100.png" width="120" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank"><img src="https://datacakra.com/wp-content/uploads/elementor/thumbs/Datacakra_Logo-oudk36detz0vvj5b2z5ktg264m2cyxvl0ci12imx8s.png" width="120" alt="Nest Logo" /></a>
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
