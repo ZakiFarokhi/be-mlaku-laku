@@ -54,6 +54,9 @@ $ npm run start
 # watch mode
 $ npm run start:dev
 
+# swagger endpoint
+$ http://localhost:3000/api/v1
+
 # production mode
 $ npm run start:prod
 ```
