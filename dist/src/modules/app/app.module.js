@@ -11,7 +11,6 @@ const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const prisma_module_1 = require("../prisma/prisma.module");
 const global_config_1 = require("../../configs/global.config");
-const logger_module_1 = require("../logger/logger.module");
 const app_service_1 = require("./app.service");
 const app_controller_1 = require("./app.controller");
 const logger_middleware_1 = require("../../middlewares/logger.middleware");
@@ -21,6 +20,7 @@ const trip_module_1 = require("../trip/trip.module");
 const point_module_1 = require("../point/point.module");
 const reward_module_1 = require("../reward/reward.module");
 const wishlist_module_1 = require("../wishlist/wishlist.module");
+const logger_module_1 = require("../logger/logger.module");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(logger_middleware_1.LoggerMiddleware).forRoutes('*');

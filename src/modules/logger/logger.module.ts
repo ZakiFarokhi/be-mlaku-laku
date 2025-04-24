@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
-import { PointService } from './point.service';
-import { PointController } from './point.controller';
-import { PrismaService } from '../prisma/prisma.service';
+
+import { MyLogger } from './logger.service';
 
 @Module({
-  controllers: [PointController],
-  providers: [PointService, PrismaService],
+  providers: [MyLogger],
+  exports: [MyLogger],
 })
-export class PointModule {}
+export class LoggerModule {}

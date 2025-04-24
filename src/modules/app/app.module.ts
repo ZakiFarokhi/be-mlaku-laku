@@ -4,7 +4,6 @@ import { ConfigModule } from '@nestjs/config';
 
 import { PrismaModule } from '../prisma/prisma.module';
 import { GLOBAL_CONFIG } from '../../configs/global.config';
-import { LoggerModule } from '../logger/logger.module';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { LoggerMiddleware } from '../../middlewares/logger.middleware';
@@ -14,6 +13,7 @@ import { TripModule } from '../trip/trip.module';
 import { PointModule } from '../point/point.module';
 import { RewardModule } from '../reward/reward.module';
 import { WishlistModule } from '../wishlist/wishlist.module';
+import { LoggerModule } from '../logger/logger.module';
 
 @Module({
   imports: [
